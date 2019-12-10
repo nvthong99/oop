@@ -40,7 +40,6 @@ public class MenuState extends State {
 	private String title;
 	private int width, height;
 
-	private boolean isCreated = false;
 	private boolean isMute = false;
 
 	public MenuState(String title, int width, int height, Game game) {
@@ -175,9 +174,10 @@ public class MenuState extends State {
 	}
 
 	private void startHardGame() {
+		backToMenu();
 		mainPanel.setVisible(false);
 		game.getDisplay().getCanvas().setVisible(true);
-		game.setGameState();
+		State.setState(Game.GAME_STATE);
 
 		ArrayList<Enemy> ene = game.getHandler().getWorld().getEntityManager().getEnemy();
 		for (Enemy e : ene) {
@@ -186,9 +186,10 @@ public class MenuState extends State {
 	}
 
 	private void startEasyGame() {
+		backToMenu();
 		mainPanel.setVisible(false);
 		game.getDisplay().getCanvas().setVisible(true);
-		game.setGameState();
+		State.setState(Game.GAME_STATE);
 
 		ArrayList<Enemy> ene = game.getHandler().getWorld().getEntityManager().getEnemy();
 		for (Enemy e : ene) {
@@ -225,15 +226,16 @@ public class MenuState extends State {
 
 	@Override
 	public void tick() {
-		if (isCreated)
-			return;
-		game.getDisplay().getCanvas().setVisible(false);
-		mainPanel.setVisible(true);
-		game.getDisplay().getFrame().revalidate();
-		isCreated = true;
 	}
 
 	@Override
 	public void render(Graphics g) {
+	}
+
+	@Override
+	public void enableUI() {
+		game.getDisplay().getCanvas().setVisible(false);
+		mainPanel.setVisible(true);
+		game.getDisplay().getFrame().revalidate();
 	}
 }

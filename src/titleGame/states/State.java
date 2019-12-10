@@ -10,6 +10,7 @@ public abstract class State {
 
 	public static void setState(State state) {
 		currentState = state;
+		state.enableUI();
 	}
 
 	public static State getState() {
@@ -27,5 +28,7 @@ public abstract class State {
 	public abstract void tick();
 
 	public abstract void render(Graphics g);
+
+	public abstract void enableUI();
 
 }

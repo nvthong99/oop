@@ -11,6 +11,7 @@ import titleGame.input.KeyManager;
 import titleGame.states.GameState;
 import titleGame.states.MenuState;
 import titleGame.states.State;
+import titleGame.states.WinState;
 
 public class Game implements Runnable {
 
@@ -28,11 +29,9 @@ public class Game implements Runnable {
 	private Sound sound;
 
 	// State
-	public State gameState;
-	public State menuState;
-//	private BufferedImage testImage;
-//	private SpriteSheet image;
-//	private BufferedImage crop;
+	public static GameState GAME_STATE;
+	public static MenuState MENU_STATE;
+	public static WinState WIN_STATE;
 
 	// Input
 	private KeyManager keyManager;
@@ -58,17 +57,17 @@ public class Game implements Runnable {
 		Assets.init();
 
 		gameCamera = new GameCamera(handler, 0, 0);
-		gameState = new GameState(handler);
-		menuState = new MenuState(title, width, height, this);
 
-		State.setState(menuState);
+		GAME_STATE = new GameState(handler);
+		MENU_STATE = new MenuState(title, width, height, this);
+		WIN_STATE = new WinState(width, height, this);
 
+		State.setState(MENU_STATE);
 	}
 
 	int x = 0;
 
 	private void tick() {
-//		display.setHealthLabel(handler.getWorld().getEntityManager().getPlayer().getHealth());
 		keyManager.tick();
 
 		if (State.getState() != null)
@@ -89,7 +88,7 @@ public class Game implements Runnable {
 
 		if (State.getState() != null)
 			State.getState().render(g);
-		if (State.getState() == gameState) {
+		if (State.getState() == GAME_STATE) {
 			g.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
 			g.drawString("Health : " + handler.getWorld().getEntityManager().getPlayer().getHealth(), 200, 100);
 		}
@@ -134,10 +133,6 @@ public class Game implements Runnable {
 		stop();
 	}
 
-	public void setGameState() {
-		State.setState(gameState);
-	}
-
 	public Display getDisplay() {
 		return this.display;
 	}
@@ -166,14 +161,10 @@ public class Game implements Runnable {
 		this.handler = handler;
 	}
 
-	public void setMenuState(State state) {
-		State.setState(menuState);
-	}
-
 	public Sound getSound() {
 		return this.sound;
 	}
-	
+
 	public synchronized void start() {
 		if (running)
 			return;
