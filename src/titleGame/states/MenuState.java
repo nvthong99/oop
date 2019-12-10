@@ -64,7 +64,6 @@ public class MenuState extends State {
 		banner.setBounds(0, 100, width, 152);
 
 		JLabel background = new JLabel(new ImageIcon(Assets.BACKGROUND));
-		background.setVisible(true);
 		background.setBounds(0, 0, width, height);
 
 		startButton = new MenuButton("Start Game");
