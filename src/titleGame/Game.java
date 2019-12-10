@@ -62,7 +62,7 @@ public class Game implements Runnable {
 		MENU_STATE = new MenuState(title, width, height, this);
 		WIN_STATE = new WinState(width, height, this);
 
-		State.setState(GAME_STATE);
+		State.setState(MENU_STATE);
 	}
 
 	int x = 0;
