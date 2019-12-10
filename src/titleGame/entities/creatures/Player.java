@@ -181,14 +181,14 @@ public class Player extends Creature {
 		}
 		if (health < 1) {
 			g.setColor(Color.red);
-			g.setFont(new Font("Comic Sans MS", Font.BOLD, 50));
-			g.drawString("Game Over!", 500, 500);
+			g.setFont(new Font("Comic Sans MS", Font.BOLD, 150));
+			g.drawString("Game Over!", 200, 500);
 			timer1 += System.nanoTime() - lastTime1;
 			if (timer1 >= 1000000000) {
 				count += 1;
 				timer1 = 0;
 			}
-			if (count > 50) {
+			if (count > 70) {
 				x = 80;
 				y = 80;
 				health = DEFAULT_HEALTH;

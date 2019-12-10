@@ -1,5 +1,6 @@
 package titleGame;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
@@ -89,8 +90,15 @@ public class Game implements Runnable {
 		if (State.getState() != null)
 			State.getState().render(g);
 		if (State.getState() == GAME_STATE) {
-			g.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
-			g.drawString("Health : " + handler.getWorld().getEntityManager().getPlayer().getHealth(), 200, 100);
+			g.setColor(Color.white);
+			g.fillRect(120, 30, 300, 30);
+			g.setColor(Color.green);
+			g.setFont(new Font("Arial", Font.BOLD, 30));
+			int health = handler.getWorld().getEntityManager().getPlayer().getHealth();
+			if (health < 15)
+				g.setColor(Color.red);
+			g.drawString("HP", 50, 55);
+			g.fillRect(120, 30, health * 10, 30);
 		}
 
 		// End Draw
