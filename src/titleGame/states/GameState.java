@@ -1,7 +1,5 @@
 package titleGame.states;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 
 import titleGame.Handler;

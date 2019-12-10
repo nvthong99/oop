@@ -35,11 +35,13 @@ public class MenuState extends State {
 	private MenuButton hardButton;
 	private MenuButton exitButton;
 	private MenuButton backButton;
+	private JButton soundButton;
 
 	private String title;
 	private int width, height;
 
 	private boolean isCreated = false;
+	private boolean isMute = false;
 
 	public MenuState(String title, int width, int height, Game game) {
 		super(game.getHandler());
@@ -109,7 +111,42 @@ public class MenuState extends State {
 			}
 		});
 
+		final ImageIcon soundIcon = new ImageIcon(Assets.SOUND);
+		final ImageIcon muteIcon = new ImageIcon(Assets.MUTE);
+
+		soundButton = new JButton(soundIcon);
+		soundButton.setBounds(width - 100, 30, 70, 70);
+		soundButton.setBorderPainted(false);
+		soundButton.setContentAreaFilled(false);
+		soundButton.setBorder(new LineBorder(NORMAL_COLOR, 5));
+		soundButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				soundButton.setBorderPainted(true);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				soundButton.setBorderPainted(false);
+			}
+		});
+		soundButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (isMute) {
+					if (game.getSound().resume()) {
+						soundButton.setIcon(soundIcon);
+					}
+				} else {
+					if (game.getSound().pause()) {
+						soundButton.setIcon(muteIcon);
+					}
+				}
+				isMute = !isMute;
+			}
+		});
+
 		mainPanel.add(banner);
+		mainPanel.add(soundButton);
 		mainPanel.add(startButton);
 		mainPanel.add(exitButton);
 		mainPanel.add(easyButton);

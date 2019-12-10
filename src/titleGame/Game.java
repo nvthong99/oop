@@ -24,6 +24,9 @@ public class Game implements Runnable {
 	private BufferStrategy bs;
 	private Graphics g;
 
+	// Sound
+	private Sound sound;
+
 	// State
 	public State gameState;
 	public State menuState;
@@ -40,10 +43,11 @@ public class Game implements Runnable {
 	// Handler
 	private Handler handler;
 
-	public Game(String title, int width, int height) {
+	public Game(String title, int width, int height, Sound sound) {
 		this.width = width;
 		this.height = height;
 		this.title = title;
+		this.sound = sound;
 		keyManager = new KeyManager();
 	}
 
@@ -166,6 +170,10 @@ public class Game implements Runnable {
 		State.setState(menuState);
 	}
 
+	public Sound getSound() {
+		return this.sound;
+	}
+	
 	public synchronized void start() {
 		if (running)
 			return;

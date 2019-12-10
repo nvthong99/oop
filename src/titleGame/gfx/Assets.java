@@ -7,7 +7,7 @@ public class Assets {
 
 	private static final int width = 32, height = 32;
 
-	public static BufferedImage dirt, grass, stone, tree, enemy, water, BACKGROUND;
+	public static BufferedImage dirt, grass, stone, tree, enemy, water, BACKGROUND, MUTE, SOUND;
 	public static BufferedImage[] player_down, player_up, player_left, player_right, player_static;
 	public static BufferedImage[] player_attackDown, player_attackUp, player_attackLeft, player_attackRight;
 	public static BufferedImage[] enemy_down, enemy_up, enemy_left, enemy_right, enemy_static;
@@ -91,6 +91,9 @@ public class Assets {
 		btn_hard[1] = ImageLoader.loadImage("/textures/hardEntered.png");
 
 		BACKGROUND = ImageLoader.loadImage("/textures/background.jpg");
+		
+		SOUND = ImageLoader.loadImage("/icon/sound.png");
+		MUTE = ImageLoader.loadImage("/icon/mute.png");
 	}
 
 }
